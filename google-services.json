@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "669445166343",
+    "project_id": "makana-fece5",
+    "storage_bucket": "makana-fece5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669445166343:android:06da695a84097a857ca1a2",
+        "android_client_info": {
+          "package_name": "com.webden.makana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC01nMQmb65RQYzDfHXVL8dQJOQscRs1m0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

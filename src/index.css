@@ -1,0 +1,667 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%; /* Deep Black #0a0a0a */
+    --foreground: 0 0% 100%; /* White */
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 43 70% 55%; /* Metallic Gold */
+    --primary-foreground: 240 10% 3.9%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 43 70% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 43 70% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 240 10% 2%;
+    --sidebar-foreground: 240 5% 90%;
+    --sidebar-primary: 43 70% 55%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 5% 90%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 43 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[#0a0a0a] text-white font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight font-bold text-white;
+  }
+}
+
+@layer utilities {
+  .text-gold-metallic {
+    background: linear-gradient(
+      135deg, 
+      #8a6d3b 0%, 
+      #d4af37 25%, 
+      #fcf6ba 50%, 
+      #d4af37 75%, 
+      #8a6d3b 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); /* Stronger shadow for visibility */
+  }
+
+  .text-gold-solid {
+    color: #d4af37;
+  }
+  
+  .bg-gold-metallic {
+    background: linear-gradient(
+      135deg, 
+      #8a6d3b 0%, 
+      #d4af37 25%, 
+      #fcf6ba 50%, 
+      #d4af37 75%, 
+      #8a6d3b 100%
+    );
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 8px 25px rgba(0,0,0,0.4); /* Deeper shadow */
+  }
+
+  .bg-gold-soft {
+    background: linear-gradient(135deg, hsl(43, 70%, 55%, 0.2), hsl(43, 70%, 55%, 0.1));
+    backdrop-blur: 10px;
+  }
+
+  .shadow-gold-premium {
+    box-shadow: 0 10px 50px -10px hsla(43, 70%, 55%, 0.6), 0 0 30px hsla(43, 70%, 55%, 0.2);
+  }
+
+  .shadow-gold {
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+  }
+
+  .glass-gold-dark {
+    background: rgba(0, 0, 0, 0.98); 
+    backdrop-blur: 20px;
+    border-bottom: 3px solid #d4af37;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+  }
+
+  .overlay-heavy {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%);
+  }
+
+  .bg-black-solid {
+    background: #000000;
+  }
+
+  .text-white-vivid {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .animate-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-shine::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+  }
+
+  .animate-shine:hover::after {
+    left: 100%;
+    top: 100%;
+    opacity: 1;
+    transition: all 0.8s ease-in-out;
+  }
+
+  .text-shadow-strong {
+    text-shadow: 0 4px 12px rgba(0,0,0,0.9);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, #d4af37 0%, #f39c12 50%, #d4af37 100%);
+    background-size: 200% auto;
+    color: #000;
+    transition: 0.5s;
+    @apply shadow-gold font-bold uppercase tracking-wider;
+  }
+
+  .btn-gold:hover {
+    background-position: right center;
+    filter: brightness(1.1);
+    @apply scale-105;
+  }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE OVERRIDES — makaan-infra-theme
+   All breakpoints: max-width 768px (mobile) and 480px (small)
+   ============================================================ */
+
+/* ---- Global / Base ---- */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Container padding on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* ---- Navbar ---- */
+  nav .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Logo sizing on mobile */
+  nav img.h-14 {
+    height: 2.75rem !important;
+  }
+
+  /* ---- Hero Section (Index page) ---- */
+  /* Make h1 readable on mobile — override huge text-6xl/8xl/9xl */
+  section .font-heading.text-6xl,
+  section .font-heading.md\:text-8xl,
+  section .font-heading.lg\:text-9xl {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Hero subheading */
+  section .font-heading.text-xl.md\:text-2xl {
+    font-size: 1rem !important;
+  }
+
+  /* Hero subtitle text */
+  section .text-xl.md\:text-2xl.text-gold-metallic {
+    font-size: 0.9rem !important;
+  }
+
+  /* Hero buttons — stack vertically */
+  section .flex.gap-3.justify-center.flex-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Hero iframe video — ensure it fills without horizontal overflow */
+  iframe.w-\[300vw\] {
+    width: 300vw !important;
+    min-width: 100% !important;
+  }
+
+  /* ---- Page Hero Sections (About, Services, Contact, etc.) ---- */
+  section .font-heading.font-extrabold.text-5xl,
+  section .font-heading.font-extrabold.md\:text-7xl,
+  section .font-heading.font-black.text-5xl.md\:text-7xl {
+    font-size: 2.2rem !important;
+    line-height: 1.15 !important;
+  }
+
+  section .text-xl.leading-relaxed {
+    font-size: 0.95rem !important;
+  }
+
+  /* Hero sections vertical padding */
+  section.py-24 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  /* ---- Who We Are (Index) — grid to column ---- */
+  .grid.md\:grid-cols-2.gap-16 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Stats 2-col grid  */
+  .grid.grid-cols-2.gap-6 {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* ---- Pricing Strip ---- */
+  .flex.flex-col.md\:flex-row.items-center.justify-between.gap-8 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .flex.flex-wrap.gap-4 {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Pricing tier cards — reduce padding */
+  .px-6.py-4.rounded-2xl.text-center.border-2 {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Pricing heading font size */
+  .font-heading.font-black.text-3xl.md\:text-4xl {
+    font-size: 1.5rem !important;
+  }
+
+  /* ---- Quality & Trust section h2 ---- */
+  .font-heading.font-black.text-4xl.md\:text-5xl {
+    font-size: 1.8rem !important;
+  }
+
+  /* ---- Why Choose Us / Quality section cards ---- */
+  /* 3-col grid -> 1-col on mobile */
+  .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3.gap-6 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Trust badges wrapping */
+  .mt-16.flex.flex-wrap.justify-center.gap-4 {
+    margin-top: 2rem;
+  }
+
+  /* Blog section 3-col -> 1-col */
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-8 {
+    grid-template-columns: 1fr;
+  }
+
+  /* ---- CTA Section ---- */
+  .font-heading.font-extrabold.text-4xl.md\:text-7xl {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .flex.gap-8.justify-center.flex-wrap {
+    gap: 1rem;
+  }
+
+  /* CTA buttons — full width on mobile */
+  .btn-gold {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* ---- Testimonial section ---- */
+  .bg-white\/5.border.border-gold-metallic\/20.rounded-3xl.p-10.md\:p-16 {
+    padding: 1.5rem !important;
+  }
+
+  .text-xl.md\:text-2xl.leading-relaxed {
+    font-size: 1rem !important;
+  }
+
+  /* ---- Cities We Serve ---- */
+  .font-heading.font-extrabold.text-4xl.md\:text-6xl {
+    font-size: 2rem !important;
+  }
+
+  /* ---- Projects Page — tabs ---- */
+  .flex.justify-center.flex-wrap.gap-6 {
+    gap: 0.5rem;
+  }
+
+  /* Project tabs — reduce padding */
+  button.px-12.py-5.rounded-2xl {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Projects 3-col -> 1-col */
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-10 {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* ---- Services page cards ---- */
+  /* Already 1-col on mobile, fix card image height */
+  .relative.h-72.overflow-hidden {
+    height: 12rem;
+  }
+
+  /* Service card padding */
+  .p-10 {
+    padding: 1.5rem;
+  }
+
+  /* ---- About page ---- */
+  /* Vision / Mission 2-col -> 1-col */
+  .grid.md\:grid-cols-2.gap-12 {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Vision/Mission card padding */
+  .bg-white\/5.border.border-gold-metallic\/20.rounded-3xl.p-12 {
+    padding: 1.5rem !important;
+  }
+
+  /* Why Choose Us 2-col -> 1-col */
+  .grid.grid-cols-1.md\:grid-cols-2.gap-6 {
+    grid-template-columns: 1fr;
+  }
+
+  /* ---- Contact page ---- */
+  /* lg:grid-cols-2 -> stack */
+  .grid.lg\:grid-cols-2.gap-16.items-start {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Map iframe height on mobile */
+  .lg\:sticky.lg\:top-32.rounded-3xl.h-\[600px\] {
+    height: 14rem !important;
+    position: static !important;
+  }
+
+  /* Contact form grid md:grid-cols-2 -> 1-col */
+  .grid.md\:grid-cols-2.gap-6 {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Contact card grid sm:grid-cols-2 -> 1-col */
+  .grid.sm\:grid-cols-2.gap-6 {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Contact section h2 */
+  .font-heading.font-black.text-4xl.md\:text-5xl.text-white.uppercase.tracking-tighter {
+    font-size: 1.8rem !important;
+  }
+
+  /* Contact form padding */
+  .bg-white\/5.border.border-gold-metallic\/20.rounded-3xl.p-10 {
+    padding: 1.25rem !important;
+  }
+
+  /* ---- Appointment page ---- */
+  /* lg:grid-cols-3 -> 1-col */
+  .grid.lg\:grid-cols-3.gap-10.items-start {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Appointment form grid md:grid-cols-2 -> 1-col */
+  .grid.md\:grid-cols-2.gap-4 {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Project type buttons — 2-col on mobile instead of 4 */
+  .grid.grid-cols-2.md\:grid-cols-4.gap-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  /* Appointment form card  */
+  .bg-white\/5.border.border-gold-metallic\/20.rounded-3xl.p-8.md\:p-12 {
+    padding: 1.25rem !important;
+  }
+
+  /* Appointment hero h1 text-5xl md:text-7xl */
+  .font-heading.font-black.text-5xl.md\:text-7xl {
+    font-size: 2rem !important;
+  }
+
+  /* ---- Gallery lightbox ---- */
+  /* Prev/Next buttons are positioned -translate-x-16 / translate-x-16 which goes offscreen */
+  /* These are addressed in Gallery.tsx directly */
+
+  /* ---- Footer ---- */
+  /* 4-col -> 1-col grid */
+  footer .grid.grid-cols-1.md\:grid-cols-4.gap-10 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Footer bottom flex -> column */
+  footer .flex.flex-col.md\:flex-row.items-center.justify-between.gap-6 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  footer .border-t.border-gold-metallic\/10.mt-20 {
+    margin-top: 2.5rem;
+  }
+
+  /* Footer brand heading */
+  footer h3.text-3xl {
+    font-size: 1.6rem !important;
+  }
+
+  /* ---- Calculator page ---- */
+  .max-w-4xl.mx-auto.bg-white\/5.border.border-gold-metallic\/20.rounded-3xl.p-8.md\:p-16 {
+    padding: 1.25rem !important;
+  }
+
+  /* Calculator name/phone 2-col -> 1-col */
+  .grid.grid-cols-1.md\:grid-cols-2.gap-4 {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Section vertical padding reduction */
+  section.py-24 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  section.py-20 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  section.py-16 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Section heading mb-16/mb-20 -> reduce */
+  .mb-16 {
+    margin-bottom: 2rem;
+  }
+
+  .mb-20 {
+    margin-bottom: 2.5rem;
+  }
+
+  /* ---- Auto Scroll containers ---- */
+  /* Keep overflow horizontal but ensure height doesn't expand layout */
+  .flex.overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Service / project cards in auto-scroll — keep width manageable */
+  .shrink-0.w-\[260px\] {
+    width: 220px;
+  }
+
+  .shrink-0.w-\[300px\] {
+    width: 250px;
+  }
+
+  /* ---- Blogs page ---- */
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-8 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Blog detail inner padding */
+  .bg-black.border.border-gold-metallic\/20.rounded-3xl.p-8.md\:p-16 {
+    padding: 1.25rem !important;
+  }
+
+  /* Blog hero image height */
+  .relative.h-\[250px\].md\:h-\[500px\] {
+    height: 200px !important;
+  }
+}
+
+/* ---- Extra small screens (< 480px) ---- */
+@media (max-width: 480px) {
+  /* Even smaller hero heading */
+  section .font-heading.font-black.text-6xl,
+  section .font-heading.font-extrabold.text-5xl {
+    font-size: 1.8rem !important;
+  }
+
+  /* Pricing tiers — stack vertically and full width */
+  .flex.flex-wrap.gap-4 .px-6.py-4.rounded-2xl {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Mobile Navbar logo */
+  nav img {
+    height: 2.25rem !important;
+  }
+
+  /* Appointment project type buttons — 2 per row */
+  .grid.grid-cols-2.md\:grid-cols-4.gap-2 button {
+    font-size: 0.6rem !important;
+    padding: 0.5rem 0.25rem !important;
+  }
+
+  /* Footer heading size */
+  footer h3 {
+    font-size: 1.4rem !important;
+  }
+
+  /* Footer contact icon */
+  footer .w-12.h-12 {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  /* Reduce section Y-padding further */
+  section.py-24 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* Auto-scroll card widths for tiny screens */
+  .shrink-0.w-\[260px\] {
+    width: 180px;
+  }
+
+  .shrink-0.w-\[300px\] {
+    width: 200px;
+  }
+
+  /* Gallery category pill buttons */
+  .px-6.py-2\.5.rounded-full {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.6rem;
+  }
+
+  /* CTA h2 */
+  .font-heading.font-extrabold.text-4xl.md\:text-7xl {
+    font-size: 1.7rem !important;
+  }
+}
+
+/* ---- Gallery Lightbox Navigation — Mobile Fix ---- */
+/* The Prev/Next buttons use -translate-x-16 / translate-x-16 which goes off-screen.
+   We override them to sit inside the image area on mobile. */
+@media (max-width: 768px) {
+  /* Lightbox container padding */
+  .fixed.inset-0.z-\[99999\].flex.items-center.justify-center {
+    padding: 1rem !important;
+  }
+
+  /* Inner lightbox wrapper */
+  .fixed.inset-0.z-\[99999\] .relative.max-w-5xl {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Close button — bring inside viewport */
+  .fixed.inset-0.z-\[99999\] button.absolute.-top-16 {
+    top: -2.5rem !important;
+    right: 0 !important;
+  }
+
+  /* Prev button — position inside image on mobile */
+  .fixed.inset-0.z-\[99999\] button.absolute.left-0.-translate-x-16 {
+    left: 0 !important;
+    transform: translateY(-50%) !important;
+    opacity: 0.85;
+  }
+
+  /* Next button — position inside image on mobile */
+  .fixed.inset-0.z-\[99999\] button.absolute.right-0.translate-x-16 {
+    right: 0 !important;
+    transform: translateY(-50%) !important;
+    opacity: 0.85;
+  }
+
+  /* Lightbox image max height on mobile */
+  .fixed.inset-0.z-\[99999\] img {
+    max-height: 65vh !important;
+  }
+}
