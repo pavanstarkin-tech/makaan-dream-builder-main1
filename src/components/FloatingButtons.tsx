@@ -1,12 +1,42 @@
 import { useState, useEffect } from "react";
-import { Phone, ChevronUp, CalendarCheck, MessageCircle, X, Sparkles } from "lucide-react";
+import { ChevronUp, X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePageContent } from "@/hooks/usePageContent";
 import { Link } from "react-router-dom";
 
-const WhatsAppIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+// Crisp Graphic Picture: Booking Calendar
+const CalendarPicture = () => (
+  <svg viewBox="0 0 36 36" className="w-6 h-6 drop-shadow-md shrink-0">
+    <rect x="4" y="7" width="28" height="25" rx="6" fill="#FFFFFF" />
+    <path d="M4 13C4 9.686 6.686 7 10 7H26C29.314 7 32 9.686 32 13V14H4V13Z" fill="#DC2626" />
+    <rect x="9" y="3" width="3" height="6" rx="1.5" fill="#1E293B" />
+    <rect x="24" y="3" width="3" height="6" rx="1.5" fill="#1E293B" />
+    <circle cx="11" cy="19" r="1.5" fill="#94A3B8" />
+    <circle cx="18" cy="19" r="1.5" fill="#94A3B8" />
+    <circle cx="25" cy="19" r="1.5" fill="#94A3B8" />
+    <path d="M12 25L16 28L24 22" stroke="#16A34A" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
+// Crisp Graphic Picture: WhatsApp Logo
+const WhatsAppPicture = () => (
+  <svg viewBox="0 0 36 36" className="w-6 h-6 drop-shadow-md shrink-0">
+    <circle cx="18" cy="18" r="17" fill="#25D366" />
+    <path
+      fill="#FFFFFF"
+      d="M18 6C11.373 6 6 11.373 6 18c0 2.32.658 4.49 1.796 6.336L6.5 30l5.85-1.536A11.936 11.936 0 0018 30c6.627 0 12-5.373 12-12S24.627 6 18 6zm6.2 16.5c-.26.73-1.52 1.39-2.11 1.48-.57.08-1.3.11-2.1-.15-.48-.16-1.11-.36-1.92-.72-3.39-1.49-5.6-4.93-5.77-5.16-.17-.22-1.38-1.84-1.38-3.51 0-1.67.88-2.49 1.19-2.83.31-.34.68-.42.91-.42.23 0 .46.002.66.012.21.01.5-.08.77.58.28.68.96 2.34 1.04 2.51.08.17.14.37.03.6-.11.22-.17.36-.34.56-.17.2-.35.44-.5.59-.17.17-.35.35-.15.69.2.34.88 1.45 1.89 2.35 1.29 1.15 2.38 1.51 2.72 1.68.34.17.53.14.74-.09.2-.22.85-.99 1.08-1.33.22-.34.46-.28.77-.17.31.11 1.98.93 2.32 1.1.34.17.57.25.65.39.08.14.08.81-.18 1.54z"
+    />
+  </svg>
+);
+
+// Crisp Graphic Picture: Phone Call Handset
+const PhoneCallPicture = () => (
+  <svg viewBox="0 0 36 36" className="w-6 h-6 drop-shadow-md shrink-0">
+    <circle cx="18" cy="18" r="17" fill="#2563EB" />
+    <path
+      fill="#FFFFFF"
+      d="M25.2 21.8l-3.3-1.4c-.7-.3-1.5-.1-2 .4l-1.4 1.8c-2.5-1.3-4.5-3.3-5.8-5.8l1.8-1.4c.5-.5.7-1.3.4-2l-1.4-3.3c-.3-.7-1.1-1.2-1.9-1.2H8.8c-1 0-1.9.9-1.8 1.9.8 7 4.7 13.1 10.5 16.5 2 1.1 4.1 1.9 6.3 2.1 1 .1 1.9-.8 1.9-1.8v-2.8c0-.9-.5-1.6-1.3-1.9l-.8-.4z"
+    />
   </svg>
 );
 
@@ -41,7 +71,7 @@ const FloatingButtons = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9990] sm:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9990] sm:hidden"
           />
         )}
       </AnimatePresence>
@@ -57,7 +87,12 @@ const FloatingButtons = () => {
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToTop}
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-black/90 backdrop-blur-md border border-gold-metallic/40 flex items-center justify-center text-gold-metallic shadow-gold hover:bg-gold-metallic hover:text-black transition-all duration-300 group"
+              style={{
+                backgroundColor: "#0b0c10",
+                border: "1.5px solid rgba(212, 175, 55, 0.5)",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.7)"
+              }}
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-300 group"
               aria-label="Scroll to top"
               title="Back to Top"
             >
@@ -84,16 +119,27 @@ const FloatingButtons = () => {
                 transition={{ duration: 0.15 }}
                 className="flex items-center gap-3 group"
               >
-                <span className="px-3 py-1.5 rounded-xl bg-black/90 border border-gold-metallic/30 text-white text-[11px] font-heading font-black tracking-wider uppercase shadow-xl backdrop-blur-md pointer-events-none group-hover:border-gold-metallic group-hover:text-gold-metallic transition-colors">
+                <span
+                  style={{
+                    backgroundColor: "#0b0c10",
+                    border: "1px solid rgba(212, 175, 55, 0.4)",
+                    boxShadow: "0 4px 15px rgba(0,0,0,0.8)"
+                  }}
+                  className="px-3 py-1.5 rounded-xl text-white text-[11px] font-heading font-black tracking-wider uppercase backdrop-blur-md pointer-events-none group-hover:border-[#D4AF37] group-hover:text-[#D4AF37] transition-colors"
+                >
                   Book Appointment
                 </span>
                 <Link
                   to="/appointment"
                   onClick={() => setIsOpen(false)}
-                  className="w-12 h-12 rounded-2xl bg-gradient-to-br from-gold-metallic to-[#9E822B] flex items-center justify-center text-black shadow-gold hover:scale-110 active:scale-95 transition-all"
+                  style={{
+                    background: "linear-gradient(135deg, #FFDF00 0%, #D4AF37 50%, #996515 100%)",
+                    boxShadow: "0 4px 18px rgba(212, 175, 55, 0.6)"
+                  }}
+                  className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all p-2.5"
                   aria-label="Book Appointment"
                 >
-                  <CalendarCheck size={20} className="stroke-[2.5]" />
+                  <CalendarPicture />
                 </Link>
               </motion.div>
 
@@ -105,7 +151,14 @@ const FloatingButtons = () => {
                 transition={{ duration: 0.15, delay: 0.03 }}
                 className="flex items-center gap-3 group"
               >
-                <span className="px-3 py-1.5 rounded-xl bg-black/90 border border-[#25D366]/40 text-white text-[11px] font-heading font-black tracking-wider uppercase shadow-xl backdrop-blur-md pointer-events-none group-hover:border-[#25D366] group-hover:text-[#25D366] transition-colors">
+                <span
+                  style={{
+                    backgroundColor: "#0b0c10",
+                    border: "1px solid rgba(37, 211, 102, 0.5)",
+                    boxShadow: "0 4px 15px rgba(0,0,0,0.8)"
+                  }}
+                  className="px-3 py-1.5 rounded-xl text-white text-[11px] font-heading font-black tracking-wider uppercase backdrop-blur-md pointer-events-none group-hover:border-[#25D366] group-hover:text-[#25D366] transition-colors"
+                >
                   WhatsApp Support
                 </span>
                 <a
@@ -113,10 +166,14 @@ const FloatingButtons = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
-                  className="w-12 h-12 rounded-2xl bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/30 hover:scale-110 active:scale-95 transition-all"
+                  style={{
+                    backgroundColor: "#25D366",
+                    boxShadow: "0 4px 18px rgba(37, 211, 102, 0.6)"
+                  }}
+                  className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all p-2.5"
                   aria-label="Chat on WhatsApp"
                 >
-                  <WhatsAppIcon />
+                  <WhatsAppPicture />
                 </a>
               </motion.div>
 
@@ -128,16 +185,27 @@ const FloatingButtons = () => {
                 transition={{ duration: 0.15, delay: 0.06 }}
                 className="flex items-center gap-3 group"
               >
-                <span className="px-3 py-1.5 rounded-xl bg-black/90 border border-gold-metallic/30 text-white text-[11px] font-heading font-black tracking-wider uppercase shadow-xl backdrop-blur-md pointer-events-none group-hover:border-gold-metallic group-hover:text-gold-metallic transition-colors">
+                <span
+                  style={{
+                    backgroundColor: "#0b0c10",
+                    border: "1px solid rgba(59, 130, 246, 0.5)",
+                    boxShadow: "0 4px 15px rgba(0,0,0,0.8)"
+                  }}
+                  className="px-3 py-1.5 rounded-xl text-white text-[11px] font-heading font-black tracking-wider uppercase backdrop-blur-md pointer-events-none group-hover:border-[#3B82F6] group-hover:text-[#3B82F6] transition-colors"
+                >
                   Direct Call
                 </span>
                 <a
                   href={`tel:${rawPhone}`}
                   onClick={() => setIsOpen(false)}
-                  className="w-12 h-12 rounded-2xl bg-gradient-to-br from-gold-metallic to-[#B89635] flex items-center justify-center text-black shadow-gold hover:scale-110 active:scale-95 transition-all"
+                  style={{
+                    background: "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+                    boxShadow: "0 4px 18px rgba(59, 130, 246, 0.6)"
+                  }}
+                  className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all p-2.5"
                   aria-label="Call Royal Developers"
                 >
-                  <Phone size={20} className="stroke-[2.5]" />
+                  <PhoneCallPicture />
                 </a>
               </motion.div>
             </motion.div>
@@ -149,24 +217,32 @@ const FloatingButtons = () => {
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`relative w-14 h-14 sm:w-15 sm:h-15 rounded-2xl flex items-center justify-center shadow-gold-premium transition-all duration-300 ${
+          style={
             isOpen
-              ? "bg-black border-2 border-gold-metallic text-gold-metallic rotate-90"
-              : "bg-gold-metallic text-black hover:brightness-110 animate-shine"
-          }`}
+              ? {
+                  backgroundColor: "#0b0c10",
+                  border: "2px solid #D4AF37",
+                  boxShadow: "0 4px 25px rgba(212, 175, 55, 0.5)"
+                }
+              : {
+                  background: "linear-gradient(135deg, #FFDF00 0%, #D4AF37 50%, #AA771C 100%)",
+                  boxShadow: "0 4px 25px rgba(212, 175, 55, 0.6)"
+                }
+          }
+          className="relative w-14 h-14 sm:w-15 sm:h-15 rounded-2xl flex items-center justify-center transition-all duration-300"
           aria-label={isOpen ? "Close Actions Menu" : "Open Quick Contact Actions"}
           title={isOpen ? "Close" : "Connect with Royal Developers"}
         >
           {/* Subtle outer pulse effect when collapsed */}
           {!isOpen && (
-            <span className="absolute -inset-1 rounded-2xl bg-gold-metallic/30 animate-ping opacity-60 pointer-events-none" />
+            <span className="absolute -inset-1 rounded-2xl bg-[#D4AF37]/40 animate-ping opacity-60 pointer-events-none" />
           )}
 
           {isOpen ? (
-            <X size={26} className="transition-transform duration-300" />
+            <X size={26} className="text-[#D4AF37] transition-transform duration-300" />
           ) : (
             <div className="relative flex items-center justify-center">
-              <MessageCircle size={26} className="stroke-[2.2]" />
+              <MessageCircle size={26} className="text-black fill-black/15 stroke-[2.4]" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black animate-pulse" />
             </div>
           )}
