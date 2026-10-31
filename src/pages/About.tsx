@@ -23,7 +23,7 @@ const About = () => {
   const { data: aboutData, loading } = usePageContent("about", defaultAbout);
 
   if (loading) {
-    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Makaan Infra...</div>;
+    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Royal Developers...</div>;
   }
 
   return (
@@ -116,7 +116,7 @@ const About = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <span className="text-gold-metallic font-heading font-black text-xs tracking-[0.4em] uppercase block mb-4">OUR PRINCIPLES</span>
-            <h2 className="font-heading font-black text-4xl md:text-5xl text-white uppercase tracking-tighter">The Makaan Standard</h2>
+            <h2 className="font-heading font-black text-4xl md:text-5xl text-white uppercase tracking-tighter">The Royal Standard</h2>
             <div className="w-16 h-1 bg-gold-metallic mx-auto mt-6 rounded-full" />
           </div>
           <motion.div 
@@ -149,7 +149,7 @@ const About = () => {
           <div className="relative z-10">
             <div className="text-center mb-16">
               <span className="text-gold-metallic font-heading font-black text-xs tracking-[0.4em] uppercase block mb-4">ADVANTAGES</span>
-              <h2 className="font-heading font-black text-4xl md:text-5xl text-white uppercase tracking-tighter">Why Makaan Infra?</h2>
+              <h2 className="font-heading font-black text-4xl md:text-5xl text-white uppercase tracking-tighter">Why Royal Developers?</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {(aboutData.whyChoose || defaultAbout.whyChoose).map((item: string, i: number) => (

@@ -2,7 +2,7 @@ export const defaultData: Record<string, any> = {
   settings: {
     logo: "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png",
     contactPhone: "+91 89262 77881",
-    contactEmail: "info@makaaninfra.com",
+    contactEmail: "info@royaldevelopers.com",
     address: "Shop No-175, Super Market, Bargarh, Odisha - 768028",
     studioName: "Royal Developers Raj Lakshman",
     tagline: "Plan Better. Build Better.",
@@ -21,7 +21,7 @@ export const defaultData: Record<string, any> = {
   },
   legal: {
     privacy: "Experience our commitment to data security and transparency through our comprehensive privacy protocols.",
-    terms: "Professional engagement guidelines and operational terms for building your dream with Makaan Infra."
+    terms: "Professional engagement guidelines and operational terms for building your dream with Royal Developers Raj Lakshman."
   },
   process: {
     steps: [
@@ -34,7 +34,7 @@ export const defaultData: Record<string, any> = {
   popups: {
     enabled: true,
     image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800",
-    heading: "BUILD YOUR DREAM WITH MAKAAN INFRA",
+    heading: "BUILD YOUR DREAM WITH ROYAL DEVELOPERS",
     subtext: "Odisha's most trusted engineering powerhouse. Let's discuss your next landmark today.",
     buttonText: "REQUEST FREE QUOTE",
     buttonLink: "/contact"
@@ -82,18 +82,18 @@ export const defaultData: Record<string, any> = {
       image: "https://images.unsplash.com/photo-1590644365607-1c5a519a9a37?auto=format&fit=crop&q=80&w=1200"
     },
     testimonial: [
-      { name: "Rajesh Mohanty", role: "Real Estate Developer", rating: 5, content: "Makaan Infra delivered our luxury multi-story project with surgical precision and structural integrity. Their consultancy is unmatched in Odisha." },
+      { name: "Rajesh Mohanty", role: "Real Estate Developer", rating: 5, content: "Royal Developers delivered our luxury multi-story project with surgical precision and structural integrity. Their consultancy is unmatched in Odisha." },
       { name: "Priyanka Das", role: "Villa Owner", rating: 5, content: "From planning to execution, the team handled everything. Our designer home in Bargarh is exactly how we envisioned it." },
-      { name: "Amit Bhol", role: "Structural Engineer", rating: 5, content: "Collaborating with Makaan Infra on industrial blueprints is always a pleasure. Their technical depth and commitment to standards are top-tier." }
+      { name: "Amit Bhol", role: "Structural Engineer", rating: 5, content: "Collaborating with Royal Developers on industrial blueprints is always a pleasure. Their technical depth and commitment to standards are top-tier." }
     ]
   },
   about: {
     hero: {
-      heading: "The Makaan Narrative",
+      heading: "The Royal Narrative",
       subtext: "Since 2020, we've been documenting the evolution of Odisha's skyline through integrity and engineering.",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200"
     },
-    story: "Founded in Bargarh, Makaan Infra emerged as a response to the need for precision-driven, high-quality civil construction in the region. Our journey is defined by every brick laid and every vision realized.",
+    story: "Founded in Bargarh, Royal Developers Raj Lakshman emerged as a response to the need for precision-driven, high-quality civil construction in the region. Our journey is defined by every brick laid and every vision realized.",
     images: ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800", "https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?auto=format&fit=crop&q=80&w=800"],
     mission: "To deliver exceptional construction services with the highest standards of safety, quality, and precision.",
     vision: "To become the definitive landmark developer and infrastructure consultant across the nation.",
@@ -143,7 +143,7 @@ export const defaultData: Record<string, any> = {
     details: {
       address: "Shop No-175, Super Market, Bargarh, Odisha - 768028",
       phone: "+91 89262 77881",
-      email: "info@makaaninfra.com",
+      email: "info@royaldevelopers.com",
       hours: "Mon - Sat: 9:00 AM - 7:00 PM"
     },
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14920.89398765958!2d83.6095!3d21.3341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a212ea3c06b0e37%3A0x1a7e5a13c0e5a0e!2sSuper%20Market%2C%20Bargarh%2C%20Odisha!5e0!3m2!1sen!2sin!4v1709000000000!5m2!1sen!2sin"
@@ -164,7 +164,7 @@ export const defaultData: Record<string, any> = {
     heroHeading: "Landmark Portfolio",
     heroSubtext: "Explore our recently commissioned and completed architectural achievements.",
     items: [
-      { title: "Makaan Heights", category: "Ongoing", location: "Bargarh", desc: "Luxury residential complex with modern amenities.", image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800" },
+      { title: "Royal Heights", category: "Ongoing", location: "Bargarh", desc: "Luxury residential complex with modern amenities.", image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800" },
       { title: "Commercial Plaza", category: "Completed", location: "Sambalpur", desc: "Ready-to-occupy business hub in the city center.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" },
       { title: "Structural Landmark", category: "Ongoing", location: "Odisha", desc: "Large scale structural engineering project.", image: "https://images.unsplash.com/photo-1541913051-1250f9df0d8e?auto=format&fit=crop&q=80&w=800" },
       { title: "Elite Residency", category: "Completed", location: "Bargarh", desc: "Premium finishing and architectural brilliance.", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" },

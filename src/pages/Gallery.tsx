@@ -23,7 +23,7 @@ const Gallery = () => {
   const { data: galleryData, loading } = usePageContent("gallery", defaultGallery);
 
   if (loading) {
-    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Makaan Infra...</div>;
+    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Royal Developers...</div>;
   }
 
   // Assign categories to items if missing (fallback round-robin)

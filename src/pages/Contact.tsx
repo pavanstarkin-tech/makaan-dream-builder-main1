@@ -38,7 +38,7 @@ const Contact = () => {
     }
     // Open WhatsApp with pre-filled message
     const msg = encodeURIComponent(
-      `Hi Makaan Infra! My name is ${form.name}.\nPhone: ${form.phone}\nEmail: ${form.email}\nMessage: ${form.message || "I'd like to get more information."}`
+      `Hi Royal Developers Raj Lakshman! My name is ${form.name}.\nPhone: ${form.phone}\nEmail: ${form.email}\nMessage: ${form.message || "I'd like to get more information."}`
     );
     window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, "_blank");
     toast({ title: "Redirecting to WhatsApp! We'll get back to you soon." });
@@ -46,7 +46,7 @@ const Contact = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Makaan Infra...</div>;
+    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Royal Developers...</div>;
   }
 
   const phone = contactData.details?.phone || defaultContact.details.phone;
@@ -88,7 +88,7 @@ const Contact = () => {
           {/* Quick WhatsApp CTA */}
           <motion.div className="mt-8 flex flex-wrap gap-4 justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
             <a
-              href={`https://wa.me/${waPhone}?text=Hi%20Makaan%20Infra%2C%20I%27d%20like%20to%20discuss%20a%20project.`}
+              href={`https://wa.me/${waPhone}?text=Hi%20Royal%20Developers%20Raj%20Lakshman%2C%20I%27d%20like%20to%20discuss%20a%20project.`}
               target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] text-white font-heading font-black px-8 py-4 rounded-2xl hover:brightness-110 transition-all shadow-lg"
             >
@@ -147,7 +147,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <a
-                  href={`https://wa.me/${waPhone}?text=Hi%20Makaan%20Infra%2C%20I%27d%20like%20to%20discuss%20my%20construction%20project.`}
+                  href={`https://wa.me/${waPhone}?text=Hi%20Royal%20Developers%20Raj%20Lakshman%2C%20I%27d%20like%20to%20discuss%20my%20construction%20project.`}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-heading font-black py-4 rounded-xl hover:brightness-110 transition-all"
                 >
@@ -200,7 +200,7 @@ const Contact = () => {
               <iframe
                 src={contactData.mapUrl || defaultContact.mapUrl}
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade" title="Makaan Infra HQ"
+                referrerPolicy="no-referrer-when-downgrade" title="Royal Developers HQ"
               />
             </div>
           </div>

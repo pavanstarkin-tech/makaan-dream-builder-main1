@@ -5,7 +5,7 @@ import { usePageContent } from "@/hooks/usePageContent";
 const defaultSettings = {
   address: "Shop No-175, Super Market, Bargarh, Odisha - 768028",
   phone: "+91 89262 77881",
-  email: "info@makaaninfra.com",
+  email: "info@royaldevelopers.com",
 };
 
 const Footer = () => {

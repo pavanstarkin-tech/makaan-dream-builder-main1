@@ -9,7 +9,7 @@ import { usePageContent } from "@/hooks/usePageContent";
 const defaultPopups = {
   enabled: true,
   image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5",
-  heading: "BUILD WITH MAKAAN INFRA",
+  heading: "BUILD WITH ROYAL DEVELOPERS",
   subtext: "Odisha's Most Trusted Construction Experts. Let's discuss your project today.",
   buttonText: "GET FREE CONSULTATION"
 };
@@ -52,7 +52,7 @@ const LeadPopup = () => {
       toast({ title: "Thank you! Connecting you via WhatsApp..." });
       // Open WhatsApp
       const waPhone = phone.replace(/\s+/g, "").replace(/^\+/, "");
-      const msg = encodeURIComponent("Hi Makaan Infra! I'm interested in your construction services. Please contact me.");
+      const msg = encodeURIComponent("Hi Royal Developers Raj Lakshman! I'm interested in your construction services. Please contact me.");
       window.open(`https://wa.me/${waPhone.startsWith("91") ? waPhone : "91" + waPhone}?text=${msg}`, "_blank");
       setTimeout(() => {
         setShow(false);

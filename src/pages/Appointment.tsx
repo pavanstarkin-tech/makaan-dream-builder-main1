@@ -72,7 +72,7 @@ const Appointment = () => {
 
     // Open WhatsApp with appointment details
     const msg = encodeURIComponent(
-      `Hi Makaan Infra! I'd like to book an appointment.\n\n` +
+      `Hi Royal Developers Raj Lakshman! I'd like to book an appointment.\n\n` +
       `👤 Name: ${form.name}\n` +
       `📞 Phone: ${form.phone}\n` +
       `📅 Date: ${form.date}\n` +
@@ -142,7 +142,7 @@ const Appointment = () => {
               <div className="col-span-2 sm:col-span-2 lg:col-span-1 bg-[#25D366]/10 border border-[#25D366]/30 rounded-2xl p-6">
                 <p className="text-white/60 text-xs mb-3 font-bold uppercase tracking-widest">Prefer to chat directly?</p>
                 <a
-                  href={`https://wa.me/${WA_NUMBER}?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment%20with%20Makaan%20Infra.`}
+                  href={`https://wa.me/${WA_NUMBER}?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment%20with%20Royal%20Developers%20Raj%20Lakshman.`}
                   target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-[#25D366] text-white font-heading font-black px-5 py-3 rounded-xl hover:brightness-110 transition-all text-sm justify-center"
                 >

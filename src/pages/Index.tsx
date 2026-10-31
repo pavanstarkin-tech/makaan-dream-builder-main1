@@ -46,7 +46,7 @@ const defaultProjects = {
     { title: "Royal Pearl Society", category: "Completed", location: "Cuttack", image: imgTechpark },
     { title: "Elite Business Center", category: "Completed", location: "Rourkela", image: imgElectricalPlumbing },
     // 6 Upcoming Projects
-    { title: "Makaan Commercial Park", category: "Upcoming", location: "Rourkela", image: imgBuildingPlanning },
+    { title: "Royal Commercial Park", category: "Upcoming", location: "Rourkela", image: imgBuildingPlanning },
     { title: "Tech Hub Odisha", category: "Upcoming", location: "Cuttack", image: imgStructuralConsultancy },
     { title: "Lakeview Township", category: "Upcoming", location: "Bhubaneswar", image: imgLakeview },
     { title: "Paradise Resort & Spa", category: "Upcoming", location: "Puri", image: imgLakeviewV2 },
@@ -83,7 +83,7 @@ const defaultBlogs = {
 const defaultSettings = {
   logo: "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png",
   phone: "+91 89262 77881",
-  email: "info@makaaninfra.com",
+  email: "info@royaldevelopers.com",
   socialLinks: { facebook: "", instagram: "", linkedin: "", twitter: "" }
 };
 
@@ -180,7 +180,7 @@ const Index = () => {
     return (
     <div className="min-h-screen bg-black overflow-x-hidden font-sans selection:bg-gold-metallic/30 selection:text-white">
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="animate-spin text-gold-metallic mr-2" /> <span className="text-white font-heading font-bold">Loading Makaan Infra...</span>
+        <Loader2 className="animate-spin text-gold-metallic mr-2" /> <span className="text-white font-heading font-bold">Loading Royal Developers...</span>
       </div>
     </div>
     );
@@ -209,11 +209,11 @@ const Index = () => {
         </div>
       )}
       {/* Hero Video Background */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden py-20 sm:py-24 md:py-28">
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-black">
           <iframe
             src={currentHome.hero?.videoUrl || "https://www.youtube.com/embed/4BzjUq921Y4?autoplay=1&mute=1&controls=0&loop=1&playlist=4BzjUq921Y4&playsinline=1&showinfo=0&rel=0&modestbranding=1"}
-            title="Makaan Infra Construction"
+            title="Royal Developers Construction"
             className="absolute top-1/2 left-1/2 w-[300vw] h-[300vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-80"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -286,7 +286,7 @@ const Index = () => {
       </section>
 
       {/* Who We Are */}
-      <section className="py-16 md:py-24 px-4 bg-black border-b border-gold-metallic/20 relative overflow-hidden w-full max-w-full">
+      <section className="min-h-[70dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-black border-b border-gold-metallic/20 relative overflow-hidden w-full max-w-full">
         <div className="container mx-auto max-w-5xl w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center w-full">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0} className="w-full">
@@ -320,7 +320,7 @@ const Index = () => {
       </section>
 
       {/* What We Do */}
-      <section className="py-24 px-4 bg-gradient-to-br from-[#0a0a0b] via-[#111114] to-[#0a0a0b] relative overflow-hidden border-y border-gold-metallic/20">
+      <section className="min-h-[75dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-gradient-to-br from-[#0a0a0b] via-[#111114] to-[#0a0a0b] relative overflow-hidden border-y border-gold-metallic/20">
         <motion.div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gold-metallic/5 blur-[120px]"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3], x: ["-30%", "-50%", "-30%"], y: ["-40%", "-20%", "-40%"] }}
@@ -367,7 +367,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 px-4 bg-black relative overflow-hidden border-y border-gold-metallic/20">
+      <section className="min-h-[75dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-black relative overflow-hidden border-y border-gold-metallic/20">
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="text-gold-metallic font-heading font-bold text-sm tracking-[0.2em] px-5 py-2 rounded-full border border-gold-metallic/30 bg-gold-metallic/10 backdrop-blur-md">
@@ -400,7 +400,7 @@ const Index = () => {
       </section>
 
       {/* Quality & Trust Section */}
-      <section className="py-24 px-4 bg-[#050505] border-y border-gold-metallic/20 relative overflow-hidden">
+      <section className="min-h-[80dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-[#050505] border-y border-gold-metallic/20 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold-metallic/5 blur-[100px]" />
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-16">
@@ -414,7 +414,7 @@ const Index = () => {
               { icon: BadgeCheck, title: "Quality Control", desc: "Every material is ISI-certified. We conduct stage-wise inspections — from foundation to finishing — with zero compromise on standards.", badge: "ISO Aligned" },
               { icon: FlaskConical, title: "Structural Testing", desc: "Load testing, soil testing, concrete cube strength tests and structural audits are conducted before and after construction milestones.", badge: "Tested & Certified" },
               { icon: Hammer, title: "Renovation Ready", desc: "Expert renovation and retrofitting services for existing buildings. We strengthen structures, revamp interiors and extend building life.", badge: "Specialists" },
-              { icon: Shield, title: "Safety First", desc: "All sites follow strict safety protocols. Helmets, scaffolding, electrical safety and site management are non-negotiable at Makaan Infra.", badge: "Safe Sites" },
+              { icon: Shield, title: "Safety First", desc: "All sites follow strict safety protocols. Helmets, scaffolding, electrical safety and site management are non-negotiable at Royal Developers Raj Lakshman.", badge: "Safe Sites" },
               { icon: TrendingUp, title: "On-Time Delivery", desc: "Milestone-based project tracking with weekly updates. We maintain an on-time delivery record across 50+ projects.", badge: "Timeline Bound" },
               { icon: Users, title: "Trusted by Developers", desc: "Preferred engineering partner for real-estate developers, builders and industrialists across Odisha.", badge: "Developer Partner" },
             ].map((item, i) => (
@@ -483,7 +483,7 @@ const Index = () => {
         { title: "Completed Projects", label: "SUCCESS STORIES", projects: completedProjects, style: "bg-[#050505] text-white border-b border-gold-metallic/10", cardStyle: "border-gold-metallic/10 bg-white/5" },
         { title: "Future Projects", label: "THE HORIZON", projects: upcomingProjects, style: "bg-black text-white", cardStyle: "border-gold-metallic/10 bg-white/5" }
       ].map((section, idx) => section.projects.length > 0 && (
-        <section key={idx} className={`py-24 px-4 ${section.style}`}>
+        <section key={idx} className={`min-h-[60dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 ${section.style}`}>
           <div className="container mx-auto">
             <div className="text-center mb-16">
               <span className="text-gold-metallic font-heading font-black text-xs tracking-[0.4em] uppercase block mb-4">{section.label}</span>
@@ -512,7 +512,7 @@ const Index = () => {
       ))}
 
       {/* Cost Calculator Section */}
-      <section className="py-24 px-4 bg-black border-y border-gold-metallic/20 relative overflow-hidden">
+      <section className="min-h-[85dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-black border-y border-gold-metallic/20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gold-metallic/5 rounded-full blur-[120px]" />
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -527,7 +527,7 @@ const Index = () => {
       </section>
 
       {/* Cities We Serve */}
-      <section className="py-24 px-4 bg-black relative overflow-hidden">
+      <section className="min-h-[65dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-black relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gold-metallic" />
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -558,7 +558,7 @@ const Index = () => {
 
       {/* Testimonials */}
       {testimonials.length > 0 && (
-        <section className="py-24 px-4 bg-black border-y border-gold-metallic/20 relative overflow-hidden">
+        <section className="min-h-[85dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-black border-y border-gold-metallic/20 relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gold-metallic/5 blur-[100px]" />
           <div className="container mx-auto max-w-4xl relative z-10">
             <div className="text-center mb-16">
@@ -590,7 +590,7 @@ const Index = () => {
       )}
 
       {/* Blog Preview */}
-      <section className="py-24 px-4 bg-black border-y border-gold-metallic/20">
+      <section className="min-h-[75dvh] flex flex-col justify-center py-16 sm:py-20 md:py-24 px-4 bg-black border-y border-gold-metallic/20">
         <div className="container mx-auto">
           <div className="text-center mb-20">
             <span className="text-gold-metallic font-heading font-black text-xs tracking-[0.4em] uppercase block mb-4">INSIGHTS & NEWS</span>
@@ -633,7 +633,7 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <section className="relative py-28 px-4 overflow-hidden group">
+      <section className="relative min-h-[75dvh] flex flex-col justify-center py-20 sm:py-24 md:py-28 px-4 overflow-hidden group">
         <div className="absolute inset-0 z-0">
           <img src={homeData.cta?.image || defaultHome.cta.image} alt="Construction" onError={handleImgError} className="w-full h-full object-cover scale-110 transition-transform duration-1000 group-hover:scale-100 opacity-40" />
           <div className="absolute inset-0 bg-black/80" />

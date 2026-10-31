@@ -144,7 +144,7 @@ const CostCalculator = () => {
             <div className="w-12 h-1 bg-gold-metallic mx-auto mt-3 sm:mt-4 rounded-full" />
             <p className="text-xs sm:text-sm font-bold text-gold-metallic mt-3 sm:mt-4 mb-4 sm:mb-6">Our engineers will call you shortly with a detailed quote.</p>
             <a
-              href={`https://wa.me/918926277881?text=${encodeURIComponent(`Hi Makaan Infra! I used your calculator.\nName: ${name}\nPhone: ${phone}\nPlot Size: ${plotSize} sqft\nFloors: ${floors}\nMaterial: ${materialOptions[materialIdx].label}\nEstimate: ₹${result.toLocaleString("en-IN")}\n\nPlease send me a detailed quote.`)}`}
+              href={`https://wa.me/918926277881?text=${encodeURIComponent(`Hi Royal Developers Raj Lakshman! I used your calculator.\nName: ${name}\nPhone: ${phone}\nPlot Size: ${plotSize} sqft\nFloors: ${floors}\nMaterial: ${materialOptions[materialIdx].label}\nEstimate: ₹${result.toLocaleString("en-IN")}\n\nPlease send me a detailed quote.`)}`}
               target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#25D366] text-white font-heading font-black px-5 sm:px-8 py-3 sm:py-4 rounded-xl hover:brightness-110 transition-all shadow-lg text-xs sm:text-sm uppercase tracking-widest"
             >

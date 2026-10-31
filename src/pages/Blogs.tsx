@@ -17,7 +17,7 @@ const Blogs = () => {
   const { data: blogsData, loading } = usePageContent("blogs", defaultBlogs);
 
   if (loading) {
-    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Makaan Infra...</div>;
+    return <div className="min-h-screen bg-black flex items-center justify-center text-gold-metallic"><Loader2 className="animate-spin mr-2" /> Loading Royal Developers...</div>;
   }
 
   return (
