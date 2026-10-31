@@ -209,12 +209,18 @@ const Index = () => {
         </div>
       )}
       {/* Hero Video Background */}
-      <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden py-20 sm:py-24 md:py-28">
+      <section className="relative min-h-0 md:min-h-[100dvh] flex items-center justify-center overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:py-28">
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-black">
           <iframe
             src={currentHome.hero?.videoUrl || "https://www.youtube.com/embed/4BzjUq921Y4?autoplay=1&mute=1&controls=0&loop=1&playlist=4BzjUq921Y4&playsinline=1&showinfo=0&rel=0&modestbranding=1"}
             title="Royal Developers Construction"
-            className="absolute top-1/2 left-1/2 w-[300vw] h-[300vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-80"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-80"
+            style={{
+              width: "max(100%, 177.78vh)",
+              height: "max(100%, 56.25vw)",
+              minWidth: "100%",
+              minHeight: "100%",
+            }}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
@@ -240,22 +246,22 @@ const Index = () => {
                   : "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png"
                 }
                 alt="Royal Developers Logo"
-                className="h-44 sm:h-56 md:h-64 lg:h-72 w-auto max-w-[90vw] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500 cursor-pointer"
+                className="h-36 sm:h-52 md:h-64 lg:h-72 w-auto max-w-[90vw] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500 cursor-pointer"
               />
             </div>
           </motion.div>
           <motion.div
-            className="inline-block mb-6 px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gold-metallic/10 border border-gold-metallic/40"
+            className="inline-block mb-4 sm:mb-6 px-4 py-1.5 sm:px-6 sm:py-3 rounded-full bg-gold-metallic/10 border border-gold-metallic/40"
             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }}
           >
             <span className="font-heading font-black text-base sm:text-xl md:text-2xl text-gold-metallic tracking-widest uppercase">Plan Better. Build Better.</span>
           </motion.div>
-          <motion.h2 className="font-heading font-bold text-xl md:text-2xl text-white mb-4 drop-shadow-2xl text-shadow-strong"
+          <motion.h2 className="font-heading font-bold text-lg sm:text-xl md:text-2xl text-white mb-2 sm:mb-4 drop-shadow-2xl text-shadow-strong"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }}
           >
             {homeData.hero.heading}
           </motion.h2>
-          <motion.p className="text-white/90 font-medium text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed text-shadow-strong"
+          <motion.p className="text-white/90 font-medium text-sm sm:text-base md:text-lg mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed text-shadow-strong"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
           >
             {homeData.hero.subtext}
