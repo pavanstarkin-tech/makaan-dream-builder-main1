@@ -209,7 +209,7 @@ const Index = () => {
         </div>
       )}
       {/* Hero Video Background */}
-      <section className="relative min-h-0 md:min-h-[100dvh] flex items-center justify-center overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:py-28">
+      <section className="relative min-h-0 md:min-h-[100dvh] flex items-center justify-center overflow-hidden pt-28 sm:pt-32 md:pt-36 lg:pt-28 pb-12 sm:pb-16 md:py-28">
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-black">
           <iframe
             src={currentHome.hero?.videoUrl || "https://www.youtube.com/embed/4BzjUq921Y4?autoplay=1&mute=1&controls=0&loop=1&playlist=4BzjUq921Y4&playsinline=1&showinfo=0&rel=0&modestbranding=1"}
@@ -230,9 +230,9 @@ const Index = () => {
         <div className="absolute inset-x-0 bottom-0 h-1 bg-gold-metallic" />
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <motion.div
-            className="flex justify-center mb-2"
+            className="flex justify-center mt-4 sm:mt-1 mb-2 sm:mb-4"
             initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+            animate={{ opacity: 1, scale: 1, y: [0, -4, 0] }}
             transition={{
               opacity: { delay: 0.1, duration: 0.8 },
               scale: { delay: 0.1, duration: 0.8 },
@@ -246,7 +246,7 @@ const Index = () => {
                   : "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png"
                 }
                 alt="Royal Developers Logo"
-                className="h-36 sm:h-52 md:h-64 lg:h-72 w-auto max-w-[90vw] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500 cursor-pointer"
+                className="h-32 sm:h-48 md:h-64 lg:h-72 w-auto max-w-[85vw] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500 cursor-pointer"
               />
             </div>
           </motion.div>
