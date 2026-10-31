@@ -209,7 +209,7 @@ const AdminDashboard = () => {
   return (
     <div className="flex h-screen overflow-hidden bg-[#050505] text-white selection:bg-gold-metallic/30">
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? "w-80" : "w-0 overflow-hidden opacity-0 pointer-events-none border-none"} bg-black border-r border-white/5 flex flex-col shrink-0 h-screen transition-all duration-300`}>
+      <aside className={`${sidebarOpen ? "w-80" : "w-0 overflow-hidden opacity-0 pointer-events-none border-none"} bg-[#0b0c10] border-r border-gold-metallic/20 flex flex-col shrink-0 h-screen transition-all duration-300`}>
         <div className="p-8 sm:p-10 border-b border-white/5 shrink-0">
           <h1 className="text-xl font-black tracking-tighter uppercase">ROYAL<span className="text-gold-metallic">DEVELOPERS</span></h1>
           <p className="text-[9px] font-black text-gold-metallic tracking-widest uppercase mt-0.5">Raj Lakshman</p>

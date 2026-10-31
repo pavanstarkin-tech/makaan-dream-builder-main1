@@ -63,7 +63,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-[10000] py-3 md:py-4 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-gold-metallic/20 shadow-2xl transition-all duration-300 rounded-b-[24px] md:rounded-b-[35px]`}
+      className={`fixed top-0 left-0 w-full z-[10000] py-3 md:py-4 ${open ? 'bg-[#0b0c10] rounded-b-none' : 'bg-[#0a0a0a] backdrop-blur-xl rounded-b-[24px] md:rounded-b-[35px]'} border-b border-gold-metallic/20 shadow-2xl transition-all duration-300`}
       initial={{ y: -100 }}
       animate={{ y: visible ? 0 : -120 }}
       transition={{ duration: 0.5 }}
@@ -140,7 +140,8 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden fixed inset-x-0 top-[64px] sm:top-[72px] bottom-0 h-[calc(100dvh-64px)] sm:h-[calc(100dvh-72px)] bg-black/98 backdrop-blur-3xl border-t border-gold-metallic/20 overflow-y-auto flex flex-col justify-between shadow-2xl px-5 py-6"
+            style={{ backgroundColor: "#0b0c10" }}
+            className="lg:hidden fixed inset-x-0 top-[64px] sm:top-[72px] bottom-0 h-[calc(100dvh-64px)] sm:h-[calc(100dvh-72px)] bg-[#0b0c10] border-t border-gold-metallic/20 overflow-y-auto flex flex-col justify-between shadow-2xl px-5 py-6 z-[10001]"
           >
             {/* Navigation Links with increased sizing & presence */}
             <div className="flex flex-col gap-2 pt-2">
@@ -154,7 +155,7 @@ const Navbar = () => {
                     className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-sm sm:text-base font-heading font-black uppercase tracking-[0.2em] transition-all duration-300 ${
                       isActive
                         ? "text-black bg-gold-metallic shadow-gold scale-[1.01]"
-                        : "text-white/80 hover:text-gold-metallic hover:bg-white/5"
+                        : "text-white/90 hover:text-gold-metallic bg-white/[0.04] border border-white/5 hover:border-gold-metallic/30"
                     }`}
                   >
                     <span>{link.label}</span>
