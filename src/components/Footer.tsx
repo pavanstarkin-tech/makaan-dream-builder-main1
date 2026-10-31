@@ -23,10 +23,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div className="md:col-span-1">
-            <h3 className="font-heading font-black text-3xl mb-2 tracking-widest text-white">MAKAAN <span className="text-gold-metallic">INFRA</span></h3>
+            <h3 className="font-heading font-black text-2xl sm:text-3xl mb-2 tracking-widest text-white uppercase">ROYAL DEVELOPERS <span className="text-gold-metallic">RAJ LAKSHMAN</span></h3>
             <p className="text-gold-metallic font-black text-sm tracking-[0.2em] uppercase mb-5">Plan Better. Build Better.</p>
             <p className="text-white/70 text-sm leading-relaxed mb-8 font-medium">
-              Odisha's trusted civil engineering and infrastructure partner for developers, builders, and homeowners. Quality construction since 2020.
+              Royal Developers Raj Lakshman — Odisha's trusted civil engineering and infrastructure partner for developers, builders, and homeowners. Quality construction since 2020.
             </p>
             <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-gold-metallic/10 border border-gold-metallic/30">
               <span className="w-2.5 h-2.5 rounded-full bg-gold-metallic animate-pulse shadow-gold" />
@@ -94,7 +94,7 @@ const Footer = () => {
                   <span className="text-white font-black group-hover:text-gold-metallic transition-colors uppercase tracking-wider">{phone}</span>
                 )}
               </a>
-              <a href={`https://wa.me/${waPhone}?text=Hi%2C%20I%27m%20interested%20in%20Makaan%20Infra%20services.`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+              <a href={`https://wa.me/${waPhone}?text=Hi%2C%20I%27m%20interested%20in%20Royal%20Developers%20Raj%20Lakshman%20services.`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-[#25D366] flex items-center justify-center shrink-0 group-hover:bg-white transition-all duration-300 shadow-gold">
                   <MessageCircle size={24} className="text-white group-hover:text-black transition-colors" />
                 </div>
@@ -113,7 +113,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gold-metallic/10 mt-20 pt-10 flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] text-white/40 font-black uppercase tracking-[0.4em] relative z-20">
-          <p>© {new Date().getFullYear()} Makaan Infra. All rights reserved. • Plan Better. Build Better. • Est. 2020</p>
+          <p>© {new Date().getFullYear()} Royal Developers Raj Lakshman. All rights reserved. • Plan Better. Build Better. • Est. 2020</p>
           <Link 
             to="/admin" 
             className="flex items-center gap-3 px-6 py-2 rounded-full border border-gold-metallic/20 text-gold-metallic/40 hover:text-gold-metallic hover:border-gold-metallic/60 transition-all duration-500 group"

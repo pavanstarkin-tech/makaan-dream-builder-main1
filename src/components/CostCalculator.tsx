@@ -34,12 +34,15 @@ const CostCalculator = () => {
     const cost = plotSize * floors * materialOptions[materialIdx].price;
     setResult(cost);
     try {
-      const { doc, getDoc, setDoc } = await import("firebase/firestore");
-      const { db } = await import("@/lib/firebase");
-      const leadsRef = doc(db, "leads", "all_leads");
-      const snapshot = await getDoc(leadsRef);
-      const currentLeads = snapshot.exists() ? snapshot.data().items || [] : [];
-      await setDoc(leadsRef, { items: [...currentLeads, { phone, name, cost, plotSize, floors, material: materialOptions[materialIdx].label, type: "calculator", date: new Date().toISOString() }] });
+      const { ref, get, set } = await import("firebase/database");
+      const { rtdb, RTDB_ROOT } = await import("@/lib/firebase");
+      const leadsRef = ref(rtdb, `${RTDB_ROOT}/website_content/leads`);
+      const snapshot = await get(leadsRef);
+      const currentLeads = snapshot.exists() ? (snapshot.val()?.items || []) : [];
+      const updatedLeads = [...currentLeads, { phone, name, cost, plotSize, floors, material: materialOptions[materialIdx].label, type: "calculator", date: new Date().toISOString() }];
+      await set(leadsRef, { items: updatedLeads });
+      const rootLeadsRef = ref(rtdb, `${RTDB_ROOT}/leads/all_leads`);
+      await set(rootLeadsRef, { items: updatedLeads });
     } catch (err) {
       console.error("Failed to sync lead:", err);
     }

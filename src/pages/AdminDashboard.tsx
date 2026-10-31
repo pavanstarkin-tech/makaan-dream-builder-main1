@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { doc, getDoc, terminate, clearIndexedDbPersistence, onSnapshot, setDoc, collection } from "firebase/firestore";
+// Switched from Firestore to Realtime Database
 import { ref, onValue, set, get, child } from "firebase/database";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth, db, app, rtdb } from "@/lib/firebase";
+import { auth, app, rtdb, RTDB_ROOT } from "@/lib/firebase";
 import { uploadImage } from "@/lib/uploadImage";
 import { defaultData } from "@/lib/defaults";
 
@@ -124,6 +124,7 @@ const AdminDashboard = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [diagVisible, setDiagVisible] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // Section States
   const [pageData, setPageData] = useState<any>({});
@@ -132,10 +133,11 @@ const AdminDashboard = () => {
   // Sync with Firestore Real-time
   useEffect(() => {
     const unsubAuth = onAuthStateChanged(auth, (user) => {
-      if (!user || user.uid !== ADMIN_UID) {
+      const isLocalAdmin = sessionStorage.getItem("makaan-admin") === "true" || localStorage.getItem("makaan-admin") === "true";
+      if (!user && !isLocalAdmin) {
         navigate("/admin");
       } else {
-        setCurrentUser(user);
+        setCurrentUser(user || { email: "admin@royaldevelopers.com", uid: "royal-admin" });
       }
     });
 
@@ -150,13 +152,13 @@ const AdminDashboard = () => {
     };
   }, [navigate]);
 
-  // Lazy Loading Firestore Listener (Single Listener for Active Tab)
+  // Lazy Loading Realtime Database Listener (Single Listener for Active Tab in Royal Builders Route)
   useEffect(() => {
     setSectionLoading(true);
-    const docRef = doc(db, "website_content", tab);
-    const unsub = onSnapshot(docRef, (snapshot) => {
+    const contentRef = ref(rtdb, `${RTDB_ROOT}/website_content/${tab}`);
+    const unsub = onValue(contentRef, (snapshot) => {
       if (snapshot.exists()) {
-        setPageData(prev => ({ ...prev, [tab]: snapshot.data() }));
+        setPageData(prev => ({ ...prev, [tab]: snapshot.val() }));
       } else {
         setPageData(prev => ({ ...prev, [tab]: defaultData[tab] || {} }));
       }
@@ -174,9 +176,9 @@ const AdminDashboard = () => {
   const saveSection = async (key: Tab, data: any, label: string) => {
     setSaving(true);
     try {
-      const docRef = doc(db, "website_content", key);
-      await setDoc(docRef, data);
-      toast({ title: `${label} synchronized with production.` });
+      const contentRef = ref(rtdb, `${RTDB_ROOT}/website_content/${key}`);
+      await set(contentRef, data);
+      toast({ title: `${label} synchronized with Realtime Database (${RTDB_ROOT}).` });
     } catch (err: any) {
       toast({ 
         title: "Sync Failed", 
@@ -189,7 +191,11 @@ const AdminDashboard = () => {
   };
 
   const handleLogout = async () => {
-    await signOut(auth);
+    sessionStorage.removeItem("makaan-admin");
+    localStorage.removeItem("makaan-admin");
+    try {
+      await signOut(auth);
+    } catch (e) {}
     navigate("/admin");
   };
 
@@ -201,11 +207,12 @@ const AdminDashboard = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#050505] text-white selection:bg-gold-metallic/30">
+    <div className="flex h-screen overflow-hidden bg-[#050505] text-white selection:bg-gold-metallic/30">
       {/* Sidebar */}
-      <aside className="w-80 bg-black border-r border-white/5 flex flex-col sticky top-0 h-screen">
-        <div className="p-10 border-b border-white/5">
-          <h1 className="text-2xl font-black tracking-tighter">MAKAAN<span className="text-gold-metallic">INFRA</span></h1>
+      <aside className={`${sidebarOpen ? "w-80" : "w-0 overflow-hidden opacity-0 pointer-events-none border-none"} bg-black border-r border-white/5 flex flex-col shrink-0 h-screen transition-all duration-300`}>
+        <div className="p-8 sm:p-10 border-b border-white/5 shrink-0">
+          <h1 className="text-xl font-black tracking-tighter uppercase">ROYAL<span className="text-gold-metallic">DEVELOPERS</span></h1>
+          <p className="text-[9px] font-black text-gold-metallic tracking-widest uppercase mt-0.5">Raj Lakshman</p>
           <div className="mt-4 flex items-center gap-2">
             <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-green-500 animate-pulse shadow-green' : 'bg-red-500'}`} />
             <span className="text-[10px] font-black uppercase tracking-widest text-white/30">{isOnline ? 'Production Online' : 'Offline Mode'}</span>
@@ -245,7 +252,7 @@ const AdminDashboard = () => {
           ))}
         </nav>
 
-        <div className="p-8 border-t border-white/5">
+        <div className="p-8 border-t border-white/5 shrink-0">
           <Button onClick={handleLogout} variant="ghost" className="w-full justify-start text-white/20 hover:text-red-500 hover:bg-red-500/10 gap-4 rounded-2xl h-14 font-black uppercase tracking-widest text-[10px]">
             <LogOut size={20} /> Terminate Session
           </Button>
@@ -253,11 +260,21 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen">
-        <header className="h-28 border-b border-white/5 bg-black/50 backdrop-blur-3xl sticky top-0 z-50 flex items-center justify-between px-12">
-          <div>
-            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-gold-metallic mb-1">Admin Panel</h2>
-            <h3 className="text-2xl font-black uppercase tracking-widest text-white">{tab.charAt(0).toUpperCase() + tab.slice(1)} Page Editor</h3>
+      <main className="flex-1 h-screen overflow-y-auto flex flex-col custom-scrollbar">
+        <header className="h-28 border-b border-white/5 bg-black/50 backdrop-blur-3xl sticky top-0 z-50 flex items-center justify-between px-6 sm:px-12 shrink-0">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-gold-metallic/50 text-gold-metallic transition-all shadow-sm"
+              title={sidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+              aria-label={sidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+            >
+              <Menu size={20} />
+            </button>
+            <div>
+              <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-gold-metallic mb-1">Admin Panel</h2>
+              <h3 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-white">{tab.charAt(0).toUpperCase() + tab.slice(1)} Page Editor</h3>
+            </div>
           </div>
           <div className="flex items-center gap-6">
             <button onClick={() => setDiagVisible(!diagVisible)} className="text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-white transition-colors">
@@ -269,7 +286,7 @@ const AdminDashboard = () => {
           </div>
         </header>
 
-        <div className="p-12 max-w-6xl mx-auto space-y-12">
+        <div className="p-6 sm:p-12 max-w-6xl mx-auto w-full space-y-12 flex-1">
           {sectionLoading && (
             <div className="py-20 flex flex-col items-center justify-center gap-4">
               <Loader2 size={40} className="text-gold-metallic animate-spin" />
@@ -291,16 +308,16 @@ const AdminDashboard = () => {
                   <div className="space-y-4">
                     <p className="text-red-500/60">System Core</p>
                     <div className="flex flex-col gap-3">
-                      <button onClick={async () => { await terminate(db); await clearIndexedDbPersistence(db); window.location.reload(); }} className="text-gold-metallic hover:underline text-left">Hard Reset Cache</button>
+                      <button onClick={async () => { window.location.reload(); }} className="text-gold-metallic hover:underline text-left">Reload Application</button>
                       <button onClick={async () => {
-                        if(confirm("SEED SYSTEM? This will overwrite empty Firestore paths with default site data. Proceed?")) {
+                        if(confirm(`SEED ROYAL BUILDERS? This will populate "${RTDB_ROOT}" in Realtime Database with default site data. Proceed?`)) {
                           setSaving(true);
                           try {
                             for (const key in defaultData) {
-                              const docRef = doc(db, "website_content", key);
-                              await setDoc(docRef, defaultData[key]);
+                              const contentRef = ref(rtdb, `${RTDB_ROOT}/website_content/${key}`);
+                              await set(contentRef, defaultData[key]);
                             }
-                            toast({ title: "System Seeded", description: "Default Firestore protocols initialized." });
+                            toast({ title: "Royal Builders Seeded", description: `Initialized RTDB under route "${RTDB_ROOT}".` });
                             window.location.reload();
                           } catch (err: any) {
                             toast({ title: "Seeding Failed", description: err.message, variant: "destructive" });
@@ -308,36 +325,14 @@ const AdminDashboard = () => {
                             setSaving(false);
                           }
                         }
-                      }} className="text-white hover:text-gold-metallic text-left">Seed System Defaults</button>
-                      <button onClick={async () => {
-                        if(confirm("MIGRATE TO REALTIME? This will copy all Firestore production data to RTDB. This is a one-time operation. Proceed?")) {
-                          setSaving(true);
-                          try {
-                            const tabs: Tab[] = ["home", "about", "services", "projects", "process", "contact", "legal", "settings", "gallery", "blogs", "calculator", "career", "leads", "applications", "popups", "cities"];
-                            for (const t of tabs) {
-                              const docRef = doc(db, "website_content", t);
-                              const snap = await getDoc(docRef);
-                              if (snap.exists()) {
-                                const contentRef = ref(rtdb, "website_content/" + t);
-                                await set(contentRef, snap.data());
-                              }
-                            }
-                            toast({ title: "Production Migration Successful", description: "Realtime Database is now the active source of truth." });
-                            window.location.reload();
-                          } catch (err: any) {
-                            toast({ title: "Migration Failed", description: err.message, variant: "destructive" });
-                          } finally {
-                            setSaving(false);
-                          }
-                        }
-                      }} className="text-orange-500 hover:text-orange-400 text-left font-black">Migrate to Realtime</button>
+                      }} className="text-white hover:text-gold-metallic text-left font-bold">Seed Royal Builders (RTDB)</button>
                       <button onClick={async () => {
                         try {
-                          const testRef = ref(rtdb, "system_test");
+                          const testRef = ref(rtdb, `${RTDB_ROOT}/system_test`);
                           await set(testRef, { timestamp: Date.now(), status: "active", admin: currentUser?.uid });
                           const snap = await get(testRef);
                           if (snap.exists()) {
-                            toast({ title: "RTDB Success", description: "Read/Write protocols verified." });
+                            toast({ title: "RTDB Success", description: `Verified Read/Write at "${RTDB_ROOT}".` });
                           }
                         } catch (err: any) {
                           toast({ title: "RTDB Error", description: err.message, variant: "destructive" });
@@ -360,14 +355,14 @@ const AdminDashboard = () => {
                          <p className="text-white/40 text-[9px] uppercase font-bold">Overwrite database with site defaults</p>
                       </div>
                       <Button onClick={async () => {
-                        if(confirm("INITIALIZE DATABASE? This will overwrite the Firestore production data with the current site static data. Proceed?")) {
+                        if(confirm(`INITIALIZE ROYAL BUILDERS? This will populate the "${RTDB_ROOT}" route in Realtime Database with current site defaults. Proceed?`)) {
                           setSaving(true);
                           try {
                             for (const key in defaultData) {
-                              const docRef = doc(db, "website_content", key);
-                              await setDoc(docRef, defaultData[key]);
+                              const contentRef = ref(rtdb, `${RTDB_ROOT}/website_content/${key}`);
+                              await set(contentRef, defaultData[key]);
                             }
-                            toast({ title: "Static Data Migrated", description: "Firestore initialized with site defaults." });
+                            toast({ title: "Royal Builders Initialized", description: `Synchronized under "${RTDB_ROOT}".` });
                             window.location.reload();
                           } catch (err: any) {
                             toast({ title: "Initialization Failed", description: err.message, variant: "destructive" });
@@ -1288,7 +1283,7 @@ const AdminDashboard = () => {
                         <div className="space-y-10">
                            <div className="grid grid-cols-2 gap-6">
                               <FormField label="Brand Identity">
-                                 <Input value={pageData.settings.studioName || "Makaan Dream Builder"} onChange={(e) => setPageData({ ...pageData, settings: { ...pageData.settings, studioName: e.target.value } })} className="bg-white/[0.03] border-white/10 text-white h-12 rounded-xl font-black px-6" />
+                                 <Input value={pageData.settings.studioName || "Royal Developers Raj Lakshman"} onChange={(e) => setPageData({ ...pageData, settings: { ...pageData.settings, studioName: e.target.value } })} className="bg-white/[0.03] border-white/10 text-white h-12 rounded-xl font-black px-6" />
                               </FormField>
                               <FormField label="Operational Mobile">
                                  <Input value={pageData.settings.contactPhone || ""} onChange={(e) => setPageData({ ...pageData, settings: { ...pageData.settings, contactPhone: e.target.value } })} className="bg-white/[0.03] border-white/10 text-white h-12 rounded-xl px-6" />

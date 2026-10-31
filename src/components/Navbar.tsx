@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShieldCheck, MapPin, CalendarCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { Menu, X, ShieldCheck, MapPin, CalendarCheck, Phone, MessageCircle, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { usePageContent } from "@/hooks/usePageContent";
 
@@ -13,15 +13,16 @@ const FALLBACK_NAV_LINKS = [
   { to: "/calculator", label: "Calculator" },
   { to: "/gallery", label: "Gallery" },
   { to: "/blogs", label: "Blogs" },
+  { to: "/career", label: "Career" },
   { to: "/contact", label: "Contact" },
 ];
 
 const Navbar = () => {
   const { data: settings } = usePageContent("settings", { logo: "", navLinks: FALLBACK_NAV_LINKS });
   const navLinks = settings.navLinks || FALLBACK_NAV_LINKS;
-  const logoUrl = (settings.logo && settings.logo !== "/logo.png" && settings.logo !== "logo.png")
+  const logoUrl = (settings.logo && settings.logo !== "/logo.png" && settings.logo !== "logo.png" && !settings.logo.includes("erasebg-transformed-19"))
     ? settings.logo
-    : "https://i.ibb.co/ZzLkP7t7/erasebg-transformed-19.png";
+    : "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -29,10 +30,26 @@ const Navbar = () => {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
 
+  // Prevent background scroll when mobile menu is active
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      // Show if scrolling up, or if at the top, or if mobile menu is open
       const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 10 || open;
 
       setScrolled(currentScrollPos > 20);
@@ -46,7 +63,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-[10000] py-4 bg-[#0a0a0a] border-b border-gold-metallic/20 shadow-2xl transition-all duration-300 rounded-b-[35px]`}
+      className={`fixed top-0 left-0 w-full z-[10000] py-3 md:py-4 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-gold-metallic/20 shadow-2xl transition-all duration-300 rounded-b-[24px] md:rounded-b-[35px]`}
       initial={{ y: -100 }}
       animate={{ y: visible ? 0 : -120 }}
       transition={{ duration: 0.5 }}
@@ -55,27 +72,29 @@ const Navbar = () => {
         <Link to="/" className="flex items-center group">
           <motion.div 
             className="relative flex items-center"
-            animate={{ y: [0, -4, 0] }}
+            animate={{ y: [0, -3, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           >
             <img
               src={logoUrl}
-              alt="Makaan Infra"
-              className="h-14 md:h-18 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
+              alt="Royal Developers"
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
             />
           </motion.div>
         </Link>
 
+        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`relative text-xs font-black px-4 py-2 transition-all duration-500 group tracking-[0.2em] uppercase drop-shadow-md text-gold-solid ${location.pathname === link.to
-                    ? "scale-105"
-                    : "hover:scale-105 hover:brightness-125"
-                }`}
-              >
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`relative text-xs font-black px-4 py-2 transition-all duration-500 group tracking-[0.2em] uppercase drop-shadow-md text-gold-solid ${
+                location.pathname === link.to
+                  ? "scale-105"
+                  : "hover:scale-105 hover:brightness-125"
+              }`}
+            >
               <motion.span
                 className="relative z-10 block"
                 whileHover={{ scale: 1.05 }}
@@ -83,8 +102,9 @@ const Navbar = () => {
               >
                 {link.label}
               </motion.span>
-              <span className={`absolute bottom-0 left-4 h-0.5 bg-white transition-all duration-300 transform origin-left ${location.pathname === link.to ? "w-[calc(100%-2rem)] scale-x-100" : "w-[calc(100%-2rem)] scale-x-0 group-hover:scale-x-100"
-                }`} />
+              <span className={`absolute bottom-0 left-4 h-0.5 bg-white transition-all duration-300 transform origin-left ${
+                location.pathname === link.to ? "w-[calc(100%-2rem)] scale-x-100" : "w-[calc(100%-2rem)] scale-x-0 group-hover:scale-x-100"
+              }`} />
             </Link>
           ))}
           <div className="flex items-center gap-2 ml-2 px-3 py-1.5 rounded-full border border-gold-metallic/20 bg-gold-metallic/5">
@@ -100,43 +120,94 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {/* Mobile Hamburger Button */}
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="lg:hidden p-3 rounded-xl transition-all duration-300 bg-white/5 border border-gold-metallic/20 text-gold-metallic hover:bg-gold-metallic hover:text-black shadow-gold"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="lg:hidden p-2.5 sm:p-3 rounded-xl transition-all duration-300 bg-white/5 border border-gold-metallic/20 text-gold-metallic hover:bg-gold-metallic hover:text-black shadow-gold"
           onClick={() => setOpen(!open)}
+          aria-label={open ? "Close menu" : "Open menu"}
         >
-          {open ? <X size={20} /> : <Menu size={20} />}
+          {open ? <X size={22} /> : <Menu size={22} />}
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={open ? "open" : "closed"}
-        variants={{
-          open: { height: "auto", opacity: 1, display: "block" },
-          closed: { height: 0, opacity: 0, transitionEnd: { display: "none" } }
-        }}
-        className="lg:hidden bg-black/95 backdrop-blur-2xl border-t border-gold-metallic/10 overflow-hidden shadow-2xl"
-      >
-        <div className="container mx-auto py-8 px-6 flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setOpen(false)}
-              className={`flex items-center justify-between px-6 py-5 rounded-2xl text-xs font-black uppercase tracking-[0.3em] transition-all duration-500 ${location.pathname === link.to
-                  ? "text-black bg-gold-metallic shadow-gold"
-                  : "text-white/60 hover:text-gold-metallic hover:bg-white/5"
-                }`}
-            >
-              {link.label}
-              <ShieldCheck size={14} className={location.pathname === link.to ? "opacity-100" : "opacity-0"} />
-            </Link>
-          ))}
-        </div>
-      </motion.div>
+      {/* Full-Height Mobile Menu Drawer */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden fixed inset-x-0 top-[64px] sm:top-[72px] bottom-0 h-[calc(100dvh-64px)] sm:h-[calc(100dvh-72px)] bg-black/98 backdrop-blur-3xl border-t border-gold-metallic/20 overflow-y-auto flex flex-col justify-between shadow-2xl px-5 py-6"
+          >
+            {/* Navigation Links with increased sizing & presence */}
+            <div className="flex flex-col gap-2 pt-2">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.to;
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-sm sm:text-base font-heading font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+                      isActive
+                        ? "text-black bg-gold-metallic shadow-gold scale-[1.01]"
+                        : "text-white/80 hover:text-gold-metallic hover:bg-white/5"
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    {isActive ? (
+                      <ShieldCheck size={18} className="text-black" />
+                    ) : (
+                      <ChevronRight size={16} className="text-white/30 group-hover:text-gold-metallic" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Bottom Section: Actions & Contact (Utilizing Device Height) */}
+            <div className="pt-6 pb-4 mt-6 border-t border-white/10 space-y-4">
+              <Link
+                to="/appointment"
+                onClick={() => setOpen(false)}
+                className="w-full py-4 rounded-xl bg-gold-metallic text-black font-heading font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-2 shadow-gold hover:brightness-110 transition-all"
+              >
+                <CalendarCheck size={16} />
+                Book Appointment
+              </Link>
+
+              <div className="grid grid-cols-2 gap-3">
+                <a
+                  href="tel:+918926277881"
+                  className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-white/5 border border-white/10 text-white font-black text-xs uppercase tracking-wider hover:border-gold-metallic hover:text-gold-metallic transition-all"
+                >
+                  <Phone size={14} className="text-gold-metallic" />
+                  Call Us
+                </a>
+                <a
+                  href="https://wa.me/918926277881"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] font-black text-xs uppercase tracking-wider hover:bg-[#25D366] hover:text-white transition-all"
+                >
+                  <MessageCircle size={14} />
+                  WhatsApp
+                </a>
+              </div>
+
+              <div className="text-center pt-2">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-metallic/20 bg-gold-metallic/5">
+                  <MapPin size={11} className="text-gold-metallic" />
+                  <span className="text-[10px] font-black text-gold-metallic/90 uppercase tracking-widest">Bargarh, Odisha • Est. 2020</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { ref, onValue } from "firebase/database";
+import { rtdb, RTDB_ROOT } from "@/lib/firebase";
 
 export function usePageContent<T>(pageName: string, defaultData: T) {
   const [data, setData] = useState<T>(defaultData);
@@ -12,18 +12,17 @@ export function usePageContent<T>(pageName: string, defaultData: T) {
     setLoading(true);
     
     try {
-      const docRef = doc(db, "website_content", pageName);
+      const contentRef = ref(rtdb, `${RTDB_ROOT}/website_content/${pageName}`);
       
-      const unsubscribe = onSnapshot(
-        docRef,
+      const unsubscribe = onValue(
+        contentRef,
         (snapshot) => {
           if (!isMounted) return;
           
           if (snapshot.exists()) {
-            const firestoreData = snapshot.data() as Partial<T>;
-            setData({ ...defaultData, ...firestoreData });
+            const rtdbData = snapshot.val() as Partial<T>;
+            setData({ ...defaultData, ...rtdbData });
           } else {
-            console.warn(`[usePageContent] Firestore doc "website_content/${pageName}" not found. Using defaults.`);
             setData(defaultData);
           }
           setLoading(false);
@@ -31,12 +30,8 @@ export function usePageContent<T>(pageName: string, defaultData: T) {
         },
         (err) => {
           if (!isMounted) return;
-          if (err.code === "permission-denied") {
-            console.error(`[usePageContent] Permission Denied for "${pageName}". Check Firestore Rules:`, err);
-          } else {
-            console.error(`[usePageContent] Firestore error for "${pageName}":`, err);
-          }
-          setError(err);
+          console.error(`[usePageContent] Realtime Database error for "${pageName}":`, err);
+          setError(err as Error);
           setLoading(false);
         }
       );

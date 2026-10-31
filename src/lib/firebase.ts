@@ -30,4 +30,6 @@ if (typeof window !== "undefined") {
   (window as any).rtdb = rtdb;
 }
 
+export const RTDB_ROOT = "royal_builders";
+
 export { app, analytics, db, auth, rtdb };

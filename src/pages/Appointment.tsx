@@ -57,12 +57,15 @@ const Appointment = () => {
     }
     setSubmitting(true);
     try {
-      const { doc, getDoc, setDoc } = await import("firebase/firestore");
-      const { db } = await import("@/lib/firebase");
-      const ref = doc(db, "appointments", "all_appointments");
-      const snapshot = await getDoc(ref);
-      const current = snapshot.exists() ? snapshot.data().items || [] : [];
-      await setDoc(ref, { items: [...current, { ...form, type: "appointment", status: "pending", date_created: new Date().toISOString() }] });
+      const { ref, get, set } = await import("firebase/database");
+      const { rtdb, RTDB_ROOT } = await import("@/lib/firebase");
+      const apptRef = ref(rtdb, `${RTDB_ROOT}/appointments/all_appointments`);
+      const snapshot = await get(apptRef);
+      const current = snapshot.exists() ? (snapshot.val()?.items || []) : [];
+      const updatedAppts = [...current, { ...form, type: "appointment", status: "pending", date_created: new Date().toISOString() }];
+      await set(apptRef, { items: updatedAppts });
+      const contentApptRef = ref(rtdb, `${RTDB_ROOT}/website_content/appointments`);
+      await set(contentApptRef, { items: updatedAppts });
     } catch (err) {
       console.error("Firebase sync failed:", err);
     }

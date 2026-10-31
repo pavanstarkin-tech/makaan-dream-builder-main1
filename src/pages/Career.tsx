@@ -21,12 +21,15 @@ const Career = () => {
       return;
     }
     try {
-      const { doc, getDoc, setDoc } = await import("firebase/firestore");
-      const { db } = await import("@/lib/firebase");
-      const appsRef = doc(db, "applications", "all_applications");
-      const snapshot = await getDoc(appsRef);
-      const currentApps = snapshot.exists() ? snapshot.data().items || [] : [];
-      await setDoc(appsRef, { items: [...currentApps, { ...form, resumeName: resume?.name || "", date: new Date().toISOString() }] });
+      const { ref, get, set } = await import("firebase/database");
+      const { rtdb, RTDB_ROOT } = await import("@/lib/firebase");
+      const appsRef = ref(rtdb, `${RTDB_ROOT}/website_content/applications`);
+      const snapshot = await get(appsRef);
+      const currentApps = snapshot.exists() ? (snapshot.val()?.items || []) : [];
+      const updatedApps = [...currentApps, { ...form, resumeName: resume?.name || "", date: new Date().toISOString() }];
+      await set(appsRef, { items: updatedApps });
+      const rootAppsRef = ref(rtdb, `${RTDB_ROOT}/applications/all_applications`);
+      await set(rootAppsRef, { items: updatedApps });
       toast({ title: "Application submitted successfully!" });
       setForm({ name: "", phone: "", email: "", position: "" });
       setResume(null);

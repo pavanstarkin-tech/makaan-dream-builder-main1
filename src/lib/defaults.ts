@@ -1,10 +1,10 @@
 export const defaultData: Record<string, any> = {
   settings: {
-    logo: "https://i.ibb.co/ZzLkP7t7/erasebg-transformed-19.png",
+    logo: "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png",
     contactPhone: "+91 89262 77881",
     contactEmail: "info@makaaninfra.com",
     address: "Shop No-175, Super Market, Bargarh, Odisha - 768028",
-    studioName: "Makaan Infra",
+    studioName: "Royal Developers Raj Lakshman",
     tagline: "Plan Better. Build Better.",
     whatsapp: "918926277881",
     socialLinks: { facebook: "", instagram: "", linkedin: "" },
@@ -59,7 +59,7 @@ export const defaultData: Record<string, any> = {
     ],
     aboutPreview: {
       heading: "Infrastructure Excellence in Odisha",
-      description: "Makaan Infra is Odisha's trusted infra partner for developers, builders and homeowners — delivering civil engineering, structural consultancy and project management with precision and transparency.",
+      description: "Royal Developers Raj Lakshman is Odisha's trusted infra partner for developers, builders and homeowners — delivering civil engineering, structural consultancy and project management with precision and transparency.",
       image: "https://images.unsplash.com/photo-1541913051-1250f9df0d8e?auto=format&fit=crop&q=80&w=800"
     },
     servicesLabel: "WHAT WE DO",

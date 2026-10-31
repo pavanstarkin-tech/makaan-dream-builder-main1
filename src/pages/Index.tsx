@@ -81,7 +81,7 @@ const defaultBlogs = {
 };
 
 const defaultSettings = {
-  logo: "https://i.ibb.co/ZzLkP7t7/erasebg-transformed-19.png",
+  logo: "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png",
   phone: "+91 89262 77881",
   email: "info@makaaninfra.com",
   socialLinks: { facebook: "", instagram: "", linkedin: "", twitter: "" }
@@ -233,14 +233,14 @@ const Index = () => {
               y: { repeat: Infinity, duration: 5, ease: "easeInOut" }
             }}
           >
-            <div className="overflow-hidden h-[192px] sm:h-[240px] md:h-[262px] lg:h-[315px] flex items-start justify-center">
+            <div className="flex items-center justify-center py-2">
               <img
-                src={settingsData?.logo && settingsData.logo !== "/logo.png" && settingsData.logo !== "logo.png"
+                src={settingsData?.logo && settingsData.logo !== "/logo.png" && settingsData.logo !== "logo.png" && !settingsData.logo.includes("erasebg-transformed-19")
                   ? settingsData.logo
-                  : "https://i.ibb.co/ZzLkP7t7/erasebg-transformed-19.png"
+                  : "https://i.ibb.co/hxVp0VKt/Royal-Developers-Metallic-Emblem.png"
                 }
-                alt="Makaan Infra Logo"
-                className="h-64 sm:h-80 md:h-[350px] lg:h-[420px] w-auto object-contain object-top drop-shadow-[0_0_50px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500 cursor-pointer"
+                alt="Royal Developers Logo"
+                className="h-44 sm:h-56 md:h-64 lg:h-72 w-auto max-w-[90vw] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500 cursor-pointer"
               />
             </div>
           </motion.div>
@@ -286,12 +286,12 @@ const Index = () => {
       </section>
 
       {/* Who We Are */}
-      <section className="py-24 px-4 bg-black border-b border-gold-metallic/20">
-        <div className="container mx-auto max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0}>
+      <section className="py-16 md:py-24 px-4 bg-black border-b border-gold-metallic/20 relative overflow-hidden w-full max-w-full">
+        <div className="container mx-auto max-w-5xl w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center w-full">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0} className="w-full">
               <span className="text-gold-metallic font-heading font-black text-xs tracking-[0.4em] uppercase block mb-6">ESTABLISHED 2020</span>
-              <h2 className="font-heading font-black text-4xl md:text-5xl text-white mt-2 mb-8 uppercase tracking-tight">
+              <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-5xl text-white mt-2 mb-6 md:mb-8 uppercase tracking-tight break-words">
                 {homeData.aboutPreview.heading.includes(" ") ? (
                   <>
                     {homeData.aboutPreview.heading.split(" ").slice(0, -1).join(" ")} <span className="text-gold-metallic">{homeData.aboutPreview.heading.split(" ").slice(-1)}</span>
@@ -300,18 +300,18 @@ const Index = () => {
                   <span className="text-gold-metallic">{homeData.aboutPreview.heading}</span>
                 )}
               </h2>
-              <p className="text-white/70 leading-relaxed mb-8 text-lg font-medium italic border-l-2 border-gold-metallic/30 pl-6">
+              <p className="text-white/70 leading-relaxed mb-8 text-sm sm:text-base md:text-lg font-medium italic border-l-2 border-gold-metallic/30 pl-4 sm:pl-6 max-w-full break-words">
                 {homeData.aboutPreview.description}
               </p>
-              <Button asChild className="bg-gold-metallic text-black font-heading font-black px-10 py-7 text-sm uppercase tracking-widest rounded-xl hover:brightness-110 shadow-gold">
+              <Button asChild className="w-full sm:w-auto inline-flex items-center justify-center bg-gold-metallic text-black font-heading font-black px-8 sm:px-10 py-5 sm:py-7 text-xs sm:text-sm uppercase tracking-widest rounded-xl hover:brightness-110 shadow-gold">
                 <Link to="/about">Our Philosophy</Link>
               </Button>
             </motion.div>
-            <motion.div className="grid grid-cols-2 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
+            <motion.div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 w-full max-w-full" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
               {(homeData.stats || []).map((s: any) => (
-                <div key={s.label} className="bg-white/5 border border-gold-metallic/10 rounded-2xl p-8 text-center hover:border-gold-metallic/40 transition-all group">
-                  <div className="font-heading font-black text-4xl text-gold-metallic group-hover:scale-110 transition-transform">{s.val}</div>
-                  <div className="text-white/40 text-[10px] uppercase font-black tracking-widest mt-2">{s.label}</div>
+                <div key={s.label} className="bg-white/5 border border-gold-metallic/10 rounded-2xl p-4 sm:p-6 md:p-8 text-center hover:border-gold-metallic/40 transition-all group flex flex-col justify-center items-center min-w-0 overflow-hidden shadow-lg">
+                  <div className="font-heading font-black text-xl sm:text-3xl md:text-4xl text-gold-metallic group-hover:scale-110 transition-transform tracking-tight leading-none break-all sm:break-normal">{s.val}</div>
+                  <div className="text-white/50 text-[9px] sm:text-[10px] uppercase font-black tracking-wider sm:tracking-widest mt-2 leading-tight text-center break-words">{s.label}</div>
                 </div>
               ))}
             </motion.div>
